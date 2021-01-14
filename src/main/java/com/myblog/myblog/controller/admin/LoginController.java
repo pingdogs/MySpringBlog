@@ -38,7 +38,9 @@ public class LoginController {
 	
 	@PostMapping("/login")
 	public String login(@RequestParam String username, @RequestParam String password, HttpSession session, RedirectAttributes attributes, Model model) {
+		System.out.println(username + "," + password);
 		User user = userService.checkuser(username, password);
+		System.out.println(user);
 		if(user != null) {
 			user.setPassword(null);
 			session.setAttribute("user", user);
@@ -46,13 +48,13 @@ public class LoginController {
 			return "admin/index";
 		}else {
 			attributes.addFlashAttribute("message", "Username or Password is wrong");
-			return "redirect: /admin";
+			return "redirect:/admin/login";
 		}
 	}
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("user");
-		return "redirect: /admin";
+		return "redirect:/admin";
 	}
 
 }

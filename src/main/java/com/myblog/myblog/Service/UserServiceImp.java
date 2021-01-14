@@ -17,7 +17,6 @@ public class UserServiceImp implements UserService {
 	public User checkuser(String username, String password) {
 		
 		User user = userRepository.findByUsernameAndPassword(username, MD5Utils.code(password));
-		
 		return user;
 	}
 
