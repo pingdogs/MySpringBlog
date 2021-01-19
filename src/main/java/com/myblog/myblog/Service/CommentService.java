@@ -8,4 +8,6 @@ public interface CommentService {
 
 	List<Comment> listCommentByBlogId(Long id);
 	Comment saveComment(Comment comment);
+	List<Comment> listComments();
+	Comment getCommentById(Long id);
 }

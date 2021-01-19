@@ -6,4 +6,6 @@ public interface UserService {
 	
 	User checkuser(String username, String password);
 
+	User checkuser(User u);
+
 }

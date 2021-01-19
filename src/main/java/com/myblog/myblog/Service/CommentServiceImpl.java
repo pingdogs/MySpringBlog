@@ -78,5 +78,15 @@ public class CommentServiceImpl implements CommentService {
 		comment.setCreateTime(new Date());
 		return commentRepository.save(comment);
 	}
+	@Override
+	public List<Comment> listComments() {
+		// TODO Auto-generated method stub
+		return commentRepository.findAll();
+	}
+	@Override
+	public Comment getCommentById(Long id) {
+		// TODO Auto-generated method stub
+		return commentRepository.findById(id).get();
+	}
 
 }

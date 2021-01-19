@@ -5,6 +5,19 @@ spring:
     active: dev
   messages:
     basename: /messages
+    encoding: UTF-8
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  
+banner:
+  charset: UTF-8	
+    
 
 
 comment.avatar: /images/avatar.png

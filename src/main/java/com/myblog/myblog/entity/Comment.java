@@ -15,6 +15,7 @@ public class Comment {
     @Id
     @GeneratedValue
     private Long id;
+    
     private String nickname;
     private String email;
     private String content;
@@ -127,4 +128,5 @@ public class Comment {
 	public void setAdminComment(boolean adminComment) {
 		this.adminComment = adminComment;
 	}
+	
 }
