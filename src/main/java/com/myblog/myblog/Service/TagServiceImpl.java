@@ -33,7 +33,7 @@ public class TagServiceImpl implements TagService {
     @Transactional
     @Override
     public Tag getTag(Long id) {
-        return tagRepository.findById(id).get();
+    	return tagRepository.existsById(id) ? tagRepository.findById(id).get():null;
     }
 
     @Override

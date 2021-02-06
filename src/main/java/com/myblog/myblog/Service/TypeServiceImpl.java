@@ -35,7 +35,7 @@ public class TypeServiceImpl implements TypeService{
 	@Override
 	public Type getType(Long id) {
 		// TODO Auto-generated method stub
-		return typeRepository.findById(id).get();
+		return typeRepository.existsById(id) ? typeRepository.findById(id).get():null;
 	}
 
 	@Override

@@ -18,10 +18,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import java.io.Serializable;
 
 @Entity
 @Table(name="blog")
-public class Blog {
+public class Blog implements Serializable{
 	
 	@Id
 	@GeneratedValue

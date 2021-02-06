@@ -41,8 +41,9 @@ public class BlogServiceImpl implements BlogService {
 	
 	@Override
 	public Blog getBlog(Long id) {
-		// TODO Auto-generated method stub
-		return blogRepository.findById(id).get();
+		if(blogRepository.existsById(id))
+			return blogRepository.findById(id).get();
+		else return null;
 	}
 	
 	@Override
@@ -150,6 +151,11 @@ public class BlogServiceImpl implements BlogService {
 			}
 			
 		}, pageable);
+	}
+
+	@Override
+	public List<Blog> listBlog() {
+		return blogRepository.findAll();
 	}
 
 }
