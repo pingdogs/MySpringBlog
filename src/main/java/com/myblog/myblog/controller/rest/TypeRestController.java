@@ -11,6 +11,9 @@ import com.myblog.myblog.entity.Tag;
 import com.myblog.myblog.entity.Type;
 import com.myblog.myblog.exceptionHandler.ServiceException;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -19,12 +22,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/type/api")
 @CrossOrigin(value = "*")
+@Api(tags = "Type Api")
 public class TypeRestController {
 
 	@Autowired
 	TypeService TypeService;
 	
     @GetMapping("/list")
+    @ApiOperation(value = "Show all types", notes = "")
     public Flux<Type> list() {
     	List<Type> Types = TypeService.listType();
     	for(Type Type: Types) {
@@ -35,6 +40,8 @@ public class TypeRestController {
 
     @GetMapping("/get/{id}")
 //    @PostMapping("/get")
+    @ApiOperation(value = "Show a type", notes = "Select a type based on input id")
+    @ApiImplicitParam(name = "id", value = "type id", paramType = "query", dataTypeClass = Long.class, required = true, example = "1024")
     public Mono<CommonResult<Type>> get(@PathVariable Long id) {
     	Type Type = TypeService.getType(id);
     	if(Type == null) {

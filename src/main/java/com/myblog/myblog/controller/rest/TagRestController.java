@@ -11,6 +11,9 @@ import com.myblog.myblog.entity.Blog;
 import com.myblog.myblog.entity.Tag;
 import com.myblog.myblog.exceptionHandler.ServiceException;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -19,11 +22,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/tag/api")
 @CrossOrigin(value = "*")
+@Api(tags = "Tag Api")
 public class TagRestController {
 
 	@Autowired
 	TagService tagService;
     @GetMapping("/list")
+    @ApiOperation(value = "Show all tags", notes = "")
     public Flux<Tag> list() {
     	List<Tag> tags = tagService.listTag();
     	for(Tag tag: tags) {
@@ -34,6 +39,8 @@ public class TagRestController {
 
     @GetMapping("/get/{id}")
 //    @PostMapping("/get")
+    @ApiOperation(value = "Show a tag", notes = "Select a tag based on input id")
+    @ApiImplicitParam(name = "id", value = "tag id", paramType = "query", dataTypeClass = Long.class, required = true, example = "1024")
     public Mono<CommonResult<Tag>> get(@PathVariable Long id) {
     	Tag tag = tagService.getTag(id);
     	if(tag == null) {
