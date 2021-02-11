@@ -1,6 +1,8 @@
 package com.myblog.myblog.entity;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable{
 
     @Id
     @GeneratedValue
@@ -26,7 +28,7 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch=FetchType.EAGER)
     private List<Blog> blogs = new ArrayList<>();
 
     public User() {

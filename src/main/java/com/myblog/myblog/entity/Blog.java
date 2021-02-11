@@ -18,6 +18,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.springframework.data.redis.core.RedisHash;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
 @Entity
@@ -49,19 +55,22 @@ public class Blog implements Serializable{
     private Date updateTime;
     
     @ManyToOne
+    @JsonIgnoreProperties(value="blogs")
 	private Type type;
-	
 	@ManyToMany(cascade = {CascadeType.PERSIST})
+    @JsonIgnoreProperties(value="blogs")
     private List<Tag> tags = new ArrayList<>();
 
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
     
     @Transient
+    @JsonIgnore
     private String tagIds;
 	
 	public void init() {

@@ -1,6 +1,10 @@
 package com.myblog.myblog.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +14,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "comment")
-public class Comment {
+public class Comment implements Serializable{
 
     @Id
     @GeneratedValue

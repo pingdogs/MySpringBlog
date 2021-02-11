@@ -27,5 +27,6 @@ public interface BlogService {
 	List<Blog> listBlog();
 	List<Blog> listRecommandBlogTop(Integer size);
 	
+	
 
 }

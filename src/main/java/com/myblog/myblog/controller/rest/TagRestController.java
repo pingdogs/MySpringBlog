@@ -20,24 +20,25 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tag/api")
+@RequestMapping("api/v1/tag")
 @CrossOrigin(value = "*")
 @Api(tags = "Tag Api")
 public class TagRestController {
 
 	@Autowired
 	TagService tagService;
-    @GetMapping("/list")
+	
+    @GetMapping(value = "/list", produces = "application/json; charset=utf-8")
     @ApiOperation(value = "Show all tags", notes = "")
     public Flux<Tag> list() {
     	List<Tag> tags = tagService.listTag();
-    	for(Tag tag: tags) {
-    		tag.setBlogs(null);
-    	}
+//    	for(Tag tag: tags) {
+//    		tag.setBlogs(null);
+//    	}
         return Flux.fromIterable(tags);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping(value="/get/{id}", produces = "application/json; charset=utf-8")
 //    @PostMapping("/get")
     @ApiOperation(value = "Show a tag", notes = "Select a tag based on input id")
     @ApiImplicitParam(name = "id", value = "tag id", paramType = "query", dataTypeClass = Long.class, required = true, example = "1024")
@@ -46,14 +47,6 @@ public class TagRestController {
     	if(tag == null) {
     		ServiceException se = new ServiceException(ServiceExceptionEnum.ID_NOT_FOUND);
     		return Mono.just(CommonResult.error(se.getCode(), se.getMessage()));
-    	}
-    	for(Blog blog : tag.getBlogs()) {
-    		blog.getType().setBlogs(null); 
-    		List<Tag> tags = blog.getTags();
-    		for(Tag t:tags) {
-    			t.setBlogs(null);
-    		}
-    		blog.setUser(null);
     	}
     	return Mono.just(CommonResult.success(tag));
     }

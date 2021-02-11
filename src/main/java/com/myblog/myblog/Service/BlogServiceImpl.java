@@ -1,5 +1,6 @@
 package com.myblog.myblog.Service;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,9 +14,13 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.myblog.myblog.dao.BlogRepository;
@@ -31,6 +36,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 
 @Service
+@Transactional
 public class BlogServiceImpl implements BlogService {
 
 	@Autowired
@@ -39,10 +45,13 @@ public class BlogServiceImpl implements BlogService {
 	@Autowired
 	private TypeRepository typeRepository;
 	
+	
 	@Override
 	public Blog getBlog(Long id) {
-		if(blogRepository.existsById(id))
-			return blogRepository.findById(id).get();
+		if(blogRepository.existsById(id)) {
+			Blog blog = blogRepository.findById(id).get();
+			return blog;
+		}
 		else return null;
 	}
 	
@@ -155,7 +164,9 @@ public class BlogServiceImpl implements BlogService {
 
 	@Override
 	public List<Blog> listBlog() {
-		return blogRepository.findAll();
+		List<Blog> blogs = blogRepository.findAll();
+		return blogs;
 	}
+	
 
 }

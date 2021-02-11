@@ -20,7 +20,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @RestController
-@RequestMapping("/type/api")
+@RequestMapping("/api/v1/type")
 @CrossOrigin(value = "*")
 @Api(tags = "Type Api")
 public class TypeRestController {
@@ -28,17 +28,17 @@ public class TypeRestController {
 	@Autowired
 	TypeService TypeService;
 	
-    @GetMapping("/list")
+    @GetMapping(value = "/list", produces = "application/json; charset=utf-8")
     @ApiOperation(value = "Show all types", notes = "")
     public Flux<Type> list() {
     	List<Type> Types = TypeService.listType();
-    	for(Type Type: Types) {
-    		Type.setBlogs(null);
-    	}
+//    	for(Type Type: Types) {
+//    		Type.setBlogs(null);
+//    	}
         return Flux.fromIterable(Types);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping(value = "/get/{id}", produces = "application/json; charset=utf-8")
 //    @PostMapping("/get")
     @ApiOperation(value = "Show a type", notes = "Select a type based on input id")
     @ApiImplicitParam(name = "id", value = "type id", paramType = "query", dataTypeClass = Long.class, required = true, example = "1024")
@@ -48,14 +48,14 @@ public class TypeRestController {
     		ServiceException se = new ServiceException(ServiceExceptionEnum.ID_NOT_FOUND);
     		return Mono.just(CommonResult.error(se.getCode(), se.getMessage()));
     	}
-    	for(Blog blog : Type.getBlogs()) {
-    		blog.getType().setBlogs(null); 
-    		List<Tag> tags = blog.getTags();
-    		for(Tag t:tags) {
-    			t.setBlogs(null);
-    		}
-    		blog.setUser(null);
-    	}
+//    	for(Blog blog : Type.getBlogs()) {
+//    		blog.getType().setBlogs(null); 
+//    		List<Tag> tags = blog.getTags();
+//    		for(Tag t:tags) {
+//    			t.setBlogs(null);
+//    		}
+//    		blog.setUser(null);
+//    	}
     	return Mono.just(CommonResult.success(Type));
     }
 

@@ -1,9 +1,12 @@
 package com.myblog.myblog.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +15,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.myblog.myblog.entity.Blog;
+
+
 
 public interface BlogRepository extends JpaSpecificationExecutor<Blog>, JpaRepository<Blog, Long>{
 
@@ -23,4 +28,6 @@ public interface BlogRepository extends JpaSpecificationExecutor<Blog>, JpaRepos
 	@Modifying
 	@Query("update Blog b set b.views = b.views+1 where b.id = ?1")
 	int updateViews(Long id);
+	
+	
 }

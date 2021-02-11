@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 
 import com.sun.istack.NotNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "type")
-public class Type {
+public class Type implements Serializable{
 
     @Id
     @GeneratedValue
