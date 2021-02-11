@@ -9,13 +9,6 @@ spring:
       ddl-auto: update
     show-sql: true
    
-    jedis:
-      pool:
-        max-active: 8 
-        max-idle: 8 
-        min-idle: 0 
-        max-wait: -1 
-  
 
 logging:
   level:
