@@ -36,7 +36,7 @@ public class SwaggerConfiguration {
              .title("Test Api document")
              .description("This is for test webflux api but JPA does not support.")
              .version("1.0.0") // 版本号
-             .contact(new Contact("YuShin", "http://github.io/pingodgs", "pingdogs@gmail.com")) 
+             .contact(new Contact("YuShin", "http://github.io/pingdogs", "pingdogs@gmail.com")) 
              .build();
  }
 
