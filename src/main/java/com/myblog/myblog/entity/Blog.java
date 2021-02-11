@@ -67,6 +67,7 @@ public class Blog implements Serializable{
     private User user;
 
     @OneToMany(mappedBy = "blog")
+    @JsonIgnoreProperties(value="blog")
     private List<Comment> comments = new ArrayList<>();
     
     @Transient

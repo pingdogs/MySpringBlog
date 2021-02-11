@@ -3,6 +3,7 @@ package com.myblog.myblog.entity;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,9 +34,11 @@ public class Comment implements Serializable{
     private Blog blog;
 
     @OneToMany(mappedBy = "parentComment")
+    @JsonIgnoreProperties(value= {"blog", "parentComment"})
     private List<Comment> replyComments = new ArrayList<>();
 
     @ManyToOne
+    @JsonIgnoreProperties(value= {"blog", "replyComments"})
     private Comment parentComment;
 
     public Comment() {
