@@ -8,12 +8,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password: Kai12348
-    database: 0 
-    timeout: 0 
    
     jedis:
       pool:
@@ -21,8 +15,6 @@ spring:
         max-idle: 8 
         min-idle: 0 
         max-wait: -1 
-  cache:
-    type: redis
   
 
 logging:
